@@ -21,3 +21,19 @@ module Bazaar
     # config.i18n.default_locale = :de
   end
 end
+
+# module Rails3DeviseRspecCucumber
+#     class Application < Rails::Application
+#         #don't g Rspec tests for vies and helpers
+#         config.generators do |g|
+#             g.test_framework :rspec, fixture: true
+#             g.fixture_replacement :factory_girl, dir: 'spec/factories'
+#             g.views_specs false
+#             g.helper_specs false
+#             g.stylesheets = false
+#             g.javascripts = false
+#             g.helper = false
+#         end
+#     end
+# end
+
