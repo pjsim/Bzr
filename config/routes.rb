@@ -1,5 +1,7 @@
 Bazaar::Application.routes.draw do
 
+  resources :offers
+
   resources :products
 
   devise_for :users

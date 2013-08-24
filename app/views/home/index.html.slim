@@ -6,8 +6,11 @@ h1 Products
 	br
 	= product.user.email
 	br
+	'Sold? 
+	= product.sold
+	br
 	- if product.user.email != current_user.email
-		button Offer
+		= link_to 'offer', new_offer_path
 	br
 
 p Some pseudocode now. Need an offer model for products. A user can send an offer about item sale at marked price or offer own price. items owner then receives offer and can accept or counter offer. if accepted the item marked as sold and cant receive more offers. offer model needs buyer, seller, buyer_price, seller_price. item can have many offers. offer belongs to buyer. 
