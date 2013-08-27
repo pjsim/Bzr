@@ -25,6 +25,13 @@ class OffersController < ApplicationController
   # POST /offers.json
   def create
     @offer = Offer.new(offer_params)
+
+    @product = Product.find(1)
+    @offer.product = @product
+    @offer.buyer = current_user.email
+    @offer.seller = @product.user.email
+    @offer.seller_price = @product.price
+
     respond_to do |format|
       if @offer.save
         format.html { redirect_to @offer, notice: 'Offer was successfully created.' }

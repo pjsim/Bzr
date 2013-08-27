@@ -9,8 +9,18 @@ h1 Products
 	'Sold? 
 	= product.sold
 	br
-	- if product.user.email != current_user.email
+	- if user_signed_in? && product.user.email != current_user.email
 		= link_to 'offer', new_offer_path
 	br
 
-p Some pseudocode now. Need an offer model for products. A user can send an offer about item sale at marked price or offer own price. items owner then receives offer and can accept or counter offer. if accepted the item marked as sold and cant receive more offers. offer model needs buyer, seller, buyer_price, seller_price. item can have many offers. offer belongs to buyer. 
+p to do: counter offer working, sent/received offers
+
+p get basic features all working then put tests in
+
+p Future Features: Map Location, How Seller will sell, where transaction, reveal email/phone of seller/buyer on offer acceptance, send email to seller or have onsite mail, item pic, user pic, user reputation --> negative votes not visible but they will detract from score etc
+
+p counter offer may need to be diff model. it could be it destroys offer then new offer destroys it or new counter offer destroys it.
+
+p im thinking.. counteroffer belongs to offer. when buyer receives counter offer he can create a new offer with the new price loaded into the model.
+
+p my offers and received offers need to be switched as i screwed that up (do this app again anyway? or at least the models) (ACTUALLY MAKE IT SENT OFFERS / RECEIVED OFFERS)
