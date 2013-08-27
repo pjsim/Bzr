@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Offer:</strong>
+  <%= @counteroffer.offer %>
+</p>
+
+<p>
+  <strong>Buyer:</strong>
+  <%= @counteroffer.buyer %>
+</p>
+
+<p>
+  <strong>Seller:</strong>
+  <%= @counteroffer.seller %>
+</p>
+
+<p>
+  <strong>Buyer price:</strong>
+  <%= @counteroffer.buyer_price %>
+</p>
+
+<p>
+  <strong>Seller price:</strong>
+  <%= @counteroffer.seller_price %>
+</p>
+
+<%= link_to 'Edit', edit_counteroffer_path(@counteroffer) %> |
+<%= link_to 'Back', counteroffers_path %>

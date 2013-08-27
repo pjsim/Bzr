@@ -1,5 +1,7 @@
 Bazaar::Application.routes.draw do
 
+  resources :counteroffers
+
   get "my_offers/index"
   resources :offers
 

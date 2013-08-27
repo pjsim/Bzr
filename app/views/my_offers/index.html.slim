@@ -1,14 +1,33 @@
 h1 Your Offers
 
-- @offers.each do |offer|
-	h4 You've received an offer from 
-	= offer.buyer
-	p for 
-	h4=offer.product.name
-	h5 he is offering #{offer.buyer_price}, while your price is #{offer.seller_price}
+- if !@my_products.empty?
+	- @my_products.each do |product|
+		h2=product.name
 
-	=link_to "Accept"
-	br
-	=link_to "Decline"
-	br
-	=link_to "Make CounterOffer"
+		- @received_offers_this_item = @received_offers.where(product: product)
+		- if !@received_offers_this_item.empty?
+			- @received_offers_this_item.each do |offer|
+				h4 You've received an offer from 
+				= offer.buyer
+				p for 
+				h4=offer.product.name
+				h5 he is offering #{offer.buyer_price}, while your price is #{offer.seller_price}
+
+				=link_to "Accept"
+				br
+				=link_to "Decline"
+
+				- @received_counteroffers_this_item_offer = @received_counteroffers.where(offer: offer)
+				-if !@received_counteroffers_this_item_offer.empty?
+					- @received_counteroffers_this_item_offer.each do |counteroffer|
+						h4 You counteroffered
+						= counteroffer.buyer
+						p for
+						h4=counteroffer.offer.product.name
+						h5 You are now offering #{counteroffer.seller_price} instead of #{counteroffer.offer.seller_price} in response to his offer of #{counteroffer.buyer_price}
+				- else
+					br
+					=link_to "Make CounterOffer", new_counteroffer_path
+		- else
+			h3 No Offers have been made for this item sold by you
+

@@ -26,7 +26,9 @@ class OffersController < ApplicationController
   def create
     @offer = Offer.new(offer_params)
 
+    #CHANGE THIS
     @product = Product.find(1)
+    
     @offer.product = @product
     @offer.buyer = current_user.email
     @offer.seller = @product.user.email
