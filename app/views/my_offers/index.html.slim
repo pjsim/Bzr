@@ -1,5 +1,7 @@
 h1 Your Offers
 
+/PRODUCTS USER HAS MADE AND OFFERS ON THEM
+
 - if !@my_products.empty?
 	- @my_products.each do |product|
 		h2=product.name
@@ -7,27 +9,53 @@ h1 Your Offers
 		- @received_offers_this_item = @received_offers.where(product: product)
 		- if !@received_offers_this_item.empty?
 			- @received_offers_this_item.each do |offer|
-				h4 You've received an offer from 
-				= offer.buyer
-				p for 
-				h4=offer.product.name
-				h5 he is offering #{offer.buyer_price}, while your price is #{offer.seller_price}
+				'You've received an offer from 
+				strong=offer.buyer
+				'&nbsp;for 
+				strong=offer.product.name
+				h4 he is offering #{offer.buyer_price}, while your price is #{offer.seller_price}
 
-				=link_to "Accept"
+				=link_to "Accept", offer, method: :delete, data: { confirm: 'Are you sure?' }
 				br
-				=link_to "Decline"
-
-				- @received_counteroffers_this_item_offer = @received_counteroffers.where(offer: offer)
-				-if !@received_counteroffers_this_item_offer.empty?
-					- @received_counteroffers_this_item_offer.each do |counteroffer|
-						h4 You counteroffered
-						= counteroffer.buyer
-						p for
-						h4=counteroffer.offer.product.name
-						h5 You are now offering #{counteroffer.seller_price} instead of #{counteroffer.offer.seller_price} in response to his offer of #{counteroffer.buyer_price}
+				=link_to "Decline", offer, method: :delete, data: { confirm: 'Are you sure?' }
+				br
+				br
+				- @given_counteroffers_this_item_offer = @given_counteroffers.where(offer: offer)
+				-if !@given_counteroffers_this_item_offer.empty?
+					- @given_counteroffers_this_item_offer.each do |counteroffer|
+						'You counteroffered
+						strong=counteroffer.buyer
+						''s offer for
+						strong=counteroffer.offer.product.name
+						h4 You are now offering #{counteroffer.seller_price} instead of #{counteroffer.offer.seller_price} in response to his offer of #{counteroffer.buyer_price}
 				- else
 					br
 					=link_to "Make CounterOffer", new_counteroffer_path
 		- else
 			h3 No Offers have been made for this item sold by you
 
+
+
+/ OFFERS USER HAS MADE
+- if !@given_offers.empty?
+	h3 You have made the following offers
+	- @given_offers.each do |offer|
+		'You offered
+		strong=offer.seller
+		br
+		strong=offer.buyer_price
+		'&nbsp;for
+		strong=offer.product.name
+		h5 his price was #{offer.seller_price}
+
+		- @received_counteroffers_this_item_offer = @received_counteroffers.where(offer: offer)
+		-if !@received_counteroffers_this_item_offer.empty?
+			- @received_counteroffers_this_item_offer.each do |counteroffer|
+				h4 #{counteroffer.buyer} counteroffered
+				p for
+				h4=counteroffer.offer.product.name
+				h5 He is now offering #{counteroffer.seller_price} instead of #{counteroffer.offer.seller_price} in response to your offer of #{counteroffer.buyer_price}
+				=link_to 'Make another offer', new_offer_path
+		- else
+			br
+			=link_to "Make CounterOffer", new_counteroffer_path
