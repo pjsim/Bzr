@@ -10,7 +10,7 @@ h1 Products
 	= product.sold
 	br
 	- if user_signed_in? && product.user.email != current_user.email
-		= link_to 'offer', new_offer_path
+		= link_to 'offer', new_offer_path(product_id: product.id)
 	br
 
 p to do: counter offer working, sent/received offers, look at CHANGE THIS in offer / counter controller

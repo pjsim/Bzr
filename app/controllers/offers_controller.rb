@@ -15,6 +15,9 @@ class OffersController < ApplicationController
   # GET /offers/new
   def new
     @offer = Offer.new
+
+    #I use this to pass the product id from the new method to the create of form
+    flash[:product_id] = params[:product_id]
   end
 
   # GET /offers/1/edit
@@ -26,9 +29,10 @@ class OffersController < ApplicationController
   def create
     @offer = Offer.new(offer_params)
 
-    #CHANGE THIS
-    @product = Product.find(1)
-    
+    #connect id from new to create
+    @product_id = flash[:product_id]
+    @product = Product.find(@product_id)
+
     @offer.product = @product
     @offer.buyer = current_user.email
     @offer.seller = @product.user.email

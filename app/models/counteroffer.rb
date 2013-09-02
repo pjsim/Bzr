@@ -1,3 +1,3 @@
 class Counteroffer < ActiveRecord::Base
-  belongs_to :offer
+  belongs_to :offer, :dependent => :destroy
 end

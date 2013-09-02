@@ -6,20 +6,12 @@ h1 Your Offers
 	- @my_products.each do |product|
 		h2=product.name
 
+		//Does this item have any offers?
 		- @received_offers_this_item = @received_offers.where(product: product)
 		- if !@received_offers_this_item.empty?
 			- @received_offers_this_item.each do |offer|
-				'You've received an offer from 
-				strong=offer.buyer
-				'&nbsp;for 
-				strong=offer.product.name
-				h4 he is offering #{offer.buyer_price}, while your price is #{offer.seller_price}
 
-				=link_to "Accept", offer, method: :delete, data: { confirm: 'Are you sure?' }
-				br
-				=link_to "Decline", offer, method: :delete, data: { confirm: 'Are you sure?' }
-				br
-				br
+				//Has a counter offer been made already?
 				- @given_counteroffers_this_item_offer = @given_counteroffers.where(offer: offer)
 				-if !@given_counteroffers_this_item_offer.empty?
 					- @given_counteroffers_this_item_offer.each do |counteroffer|
@@ -28,11 +20,24 @@ h1 Your Offers
 						''s offer for
 						strong=counteroffer.offer.product.name
 						h4 You are now offering #{counteroffer.seller_price} instead of #{counteroffer.offer.seller_price} in response to his offer of #{counteroffer.buyer_price}
-				- else
+
+				//If no counter offer then just display offer
+				-else
+					'You've received an offer from 
+					strong=offer.buyer
+					'&nbsp;for 
+					strong=offer.product.name
+					h4 he is offering #{offer.buyer_price}, while your price is #{offer.seller_price}
+
+					=link_to "Accept", offer, method: :delete, data: { confirm: 'Are you sure?' }
+					br
+					=link_to "Decline", offer, method: :delete, data: { confirm: 'Are you sure?' }
 					br
 					=link_to "Make CounterOffer", new_counteroffer_path
+
 		- else
 			h3 No Offers have been made for this item sold by you
+
 
 
 
@@ -56,6 +61,3 @@ h1 Your Offers
 				h4=counteroffer.offer.product.name
 				h5 He is now offering #{counteroffer.seller_price} instead of #{counteroffer.offer.seller_price} in response to your offer of #{counteroffer.buyer_price}
 				=link_to 'Make another offer', new_offer_path
-		- else
-			br
-			=link_to "Make CounterOffer", new_counteroffer_path
