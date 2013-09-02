@@ -1,3 +1,4 @@
 class Offer < ActiveRecord::Base
-  belongs_to :product, :dependent => :destroy
+  belongs_to :product
+  has_one :counteroffer, dependent: :destroy
 end
