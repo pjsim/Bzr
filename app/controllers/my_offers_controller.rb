@@ -8,11 +8,14 @@ class MyOffersController < ApplicationController
   end
 
   def accept
-  	raise 'hs'
+    @offer = Offer.find(params[:my_offer_id])
+    @offer.product.sold = true
+    @offer.product.save
   	#When offer is accepted
   	#the offerer is notified
   	#the product has sold set to true
   	#the offer/counteroffer is deleted
+    redirect_to my_offers_path
   end
 
   def decline

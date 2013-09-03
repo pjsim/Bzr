@@ -30,7 +30,7 @@ h1 Your Offers
 					h4 he is offering #{offer.buyer_price}, while your price is #{offer.seller_price}
 
 					//=link_to "Accept", offer, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button'
-					=link_to "Accept", my_offers_path
+					=link_to "Accept", my_offer_accept_path(offer)
 					br
 					=link_to "Decline", offer, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button'
 					br
