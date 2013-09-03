@@ -10,17 +10,18 @@ h1 Products
 	= product.sold
 	br
 	- if user_signed_in? && product.user.email != current_user.email
-		= link_to 'offer', new_offer_path(product_id: product.id)
+		=link_to 'offer', new_offer_path(product_id: product.id)
 	br
-
-p to do: counter offer working, sent/received offers, look at CHANGE THIS in offer / counter controller
 
 p get basic features all working then put tests in
 
 p Future Features: Map Location, How Seller will sell, where transaction, reveal email/phone of seller/buyer on offer acceptance, send email to seller or have onsite mail, item pic, user pic, user reputation --> negative votes not visible but they will detract from score etc
 
-p counter offer may need to be diff model. it could be it destroys offer then new offer destroys it or new counter offer destroys it.
+p Add a graph for each product that displays --> your price. all offers and average price of offers. what similar items price.
 
-p im thinking.. counteroffer belongs to offer. when buyer receives counter offer he can create a new offer with the new price loaded into the model.
-
-p my offers and received offers need to be switched as i screwed that up (do this app again anyway? or at least the models) (ACTUALLY MAKE IT SENT OFFERS / RECEIVED OFFERS)
+h4 Stage 1: Add basic layout and design
+h4 Stage 2: Add tests
+h4 Stage 3: Add other essentials: admin section, pics, email, user names not email, votes etc
+h4 Stage 4: Add MVP design and make Mobile ready
+h4 Stage 5: Refactor
+h4 Stage 6: Add the graph for each product
