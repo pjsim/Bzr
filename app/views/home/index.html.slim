@@ -1,16 +1,16 @@
 h1 Products
 - @products.each do |product|
-	= product.name
+	strong=product.name
 	br
 	= product.price
 	br
 	= product.user.email
 	br
-	'Sold? 
-	= product.sold
-	br
+	- if product.sold?
+		strong SOLD
+		br
 	- if user_signed_in? && product.user.email != current_user.email
-		=link_to 'offer', new_offer_path(product_id: product.id)
+		=link_to 'offer', new_offer_path(product_id: product.id), :class => 'button'
 	br
 
 p get basic features all working then put tests in

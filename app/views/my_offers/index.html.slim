@@ -29,11 +29,12 @@ h1 Your Offers
 					strong=offer.product.name
 					h4 he is offering #{offer.buyer_price}, while your price is #{offer.seller_price}
 
-					=link_to "Accept", offer, method: :delete, data: { confirm: 'Are you sure?' }
+					//=link_to "Accept", offer, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button'
+					=link_to "Accept", my_offers_path
 					br
-					=link_to "Decline", offer, method: :delete, data: { confirm: 'Are you sure?' }
+					=link_to "Decline", offer, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button'
 					br
-					=link_to "Make CounterOffer", new_counteroffer_path
+					=link_to "Make CounterOffer", new_counteroffer_path, :class => 'button'
 
 		- else
 			h3 No Offers have been made for this item sold by you

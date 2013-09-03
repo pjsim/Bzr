@@ -6,6 +6,10 @@ Bazaar::Application.routes.draw do
   get "my_offers/index"
   resources :offers
 
+  resources :my_offers do
+    get 'accept'
+  end
+
   resources :products
 
   devise_for :users
