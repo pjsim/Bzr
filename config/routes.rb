@@ -1,4 +1,6 @@
 Bazaar::Application.routes.draw do
+  resources :offerlists
+
   get "home/index"
   get "my_items/index"
   get "my_offers/index"
@@ -15,6 +17,7 @@ Bazaar::Application.routes.draw do
 
   resources :my_offers do
     get 'accept'
+    get 'decline'
   end
   resources :my_offers, :path => 'accept'
   devise_for :users

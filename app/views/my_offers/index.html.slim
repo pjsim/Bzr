@@ -30,11 +30,11 @@ h1 Your Offers
 					h4 he is offering #{offer.buyer_price}, while your price is #{offer.seller_price}
 
 					//=link_to "Accept", offer, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button'
-					=link_to "Accept", my_offer_accept_path(offer)
+					=link_to "Accept", my_offer_accept_path(offer), class: 'button'
 					br
-					=link_to "Decline", offer, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button'
+					=link_to "Decline", my_offer_decline_path(offer), class: 'button'
 					br
-					=link_to "Make CounterOffer", new_counteroffer_path, :class => 'button'
+					=link_to "Make CounterOffer", new_counteroffer_path, class: 'button'
 
 		- else
 			h3 No Offers have been made for this item sold by you
@@ -61,4 +61,4 @@ h1 Your Offers
 				p for
 				h4=counteroffer.offer.product.name
 				h5 He is now offering #{counteroffer.seller_price} instead of #{counteroffer.offer.seller_price} in response to your offer of #{counteroffer.buyer_price}
-				=link_to 'Make another offer', new_offer_path
+				=link_to 'Make another offer', new_offer_path(product_id: counteroffer.offer.product.id), class: 'button'

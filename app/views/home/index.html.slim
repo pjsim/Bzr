@@ -9,9 +9,14 @@ h1 Products
 	- if product.sold?
 		strong SOLD
 		br
-	- if user_signed_in? && product.user.email != current_user.email
-		=link_to 'offer', new_offer_path(product_id: product.id), :class => 'button'
+	//I need to make it so that when a user makes an offer this will dissapear
+	- elsif user_signed_in? && product.user.email != current_user.email
+		=link_to 'offer', new_offer_path(product_id: product.id), class: 'button'
 	br
+
+p My Items and My Received Offers = same page
+
+p Idea: new model --> offerlist --> keeps record of offers for item and lists them like blog posts on the offers page for that item
 
 p get basic features all working then put tests in
 
