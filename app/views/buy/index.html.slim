@@ -1,0 +1,15 @@
+h1 Products
+- @products.each do |product|
+	strong=product.name
+	br
+	= product.price
+	br
+	= product.user.email
+	br
+	- if product.sold?
+		strong SOLD
+		br
+	//I need to make it so that when a user makes an offer this will dissapear
+	- elsif user_signed_in? && product.user.email != current_user.email
+		=link_to 'offer', new_offer_path(product_id: product.id), class: 'button'
+	br

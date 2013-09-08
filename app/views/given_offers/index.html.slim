@@ -1,0 +1,21 @@
+h1 You have made the following offers
+-if !@given_offers.empty?
+	-@given_offers.each do |offer|
+		h4=offer.product.name
+		br Your Price: #{offer.buyer_price}
+		br Seller: #{offer.seller}
+		br Seller Price: #{offer.seller_price}
+		button=link_to 'Change Offer', root_path
+		button=link_to 'Offer History', root_path
+		button=link_to 'Retract Offer', root_path
+		/CounterOffers?
+		-@counteroffer = @received_counteroffers.where(offer: offer)
+		-if !@counteroffer.empty?
+			br
+			-@counteroffer.each do |counteroffer|
+				strong #{counteroffer.seller} has offered you #{counteroffer.seller_price}, instead of #{counteroffer.offer.seller_price}.
+				br
+				button=link_to 'Accept CounterOffer', root_path
+				button=link_to 'Make Another Offer', new_offer_path(product_id: counteroffer.offer.product.id)
+				button=link_to 'Decline Offer', root_path
+		hr

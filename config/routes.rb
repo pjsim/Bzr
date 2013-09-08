@@ -1,4 +1,7 @@
 Bazaar::Application.routes.draw do
+  get "given_offers/index"
+  get "received_offers/index"
+  get "buy/index"
   resources :offerlists
 
   get "home/index"

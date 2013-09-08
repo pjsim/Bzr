@@ -1,0 +1,35 @@
+h1 Your Items
+-if !@my_products.empty?
+	-@my_products.each do |product|
+		h3=product.name
+		-@offers = @received_offers.where(product: product)
+		/-if !@offers.empty?
+
+
+
+
+
+			/ -@offers.each do |offer|
+			/ 	strong=offer.buyer
+			/ 	=offer.buyer_price
+
+			/ 	/ /existing counteroffer?
+			/ 	/ -@counteroffer = @given_counteroffers.where(offer: offer)
+			/ 	/ -if !@counteroffer.empty?
+			/ 	/ 	-@counteroffer.each do |counteroffer|
+			/ 	/ 		strong You counteroffered with $ 
+			/ 	/ 		strong=counteroffer.seller_price
+			/ 	/ -else
+			/ 	/ 	button=link_to 'Accept', my_offer_accept_path(offer)
+			/ 	/ 	button=link_to 'CounterOffer', new_counteroffer_path
+			/ 	/ 	button=link_to 'Decline', my_offer_decline_path(offer)
+			/ 	button=link_to 'Offer History', root_path
+			/ 	hr
+		hr
+
+
+
+
+
+
+
