@@ -2,8 +2,6 @@ Bazaar::Application.routes.draw do
   get "given_offers/index"
   get "received_offers/index"
   get "buy/index"
-  resources :offerlists
-
   get "home/index"
   get "my_items/index"
   get "my_offers/index"
@@ -13,6 +11,13 @@ Bazaar::Application.routes.draw do
   #     resources :counteroffers
   #   end
   # end
+
+  resources :given_offers
+  resources :received_offers do
+    get 'accept'
+    get 'decline'
+  end
+
 
   resources :products
   resources :offers

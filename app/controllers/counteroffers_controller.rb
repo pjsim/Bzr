@@ -15,6 +15,7 @@ class CounteroffersController < ApplicationController
   # GET /counteroffers/new
   def new
     @counteroffer = Counteroffer.new
+    flash[:offer_id] = params[:offer_id]
   end
 
   # GET /counteroffers/1/edit
@@ -26,8 +27,8 @@ class CounteroffersController < ApplicationController
   def create
     @counteroffer = Counteroffer.new(counteroffer_params)
 
-    #CHANGE THIS
-    @offer = Offer.first
+    @offer_id = flash[:offer_id]
+    @offer = Offer.find(@offer_id)
 
     @counteroffer.offer = @offer
     @counteroffer.buyer = @offer.buyer
