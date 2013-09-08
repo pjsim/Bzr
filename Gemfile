@@ -46,17 +46,17 @@ end
 gem 'slim'
 gem 'cucumber-rails', :group => :test, :require => false
 gem 'launchy'
-# gem 'capybara', :group => :test
-# gem 'faker', :group => :test
-# gem 'guard-rspec', :group => :test
-# gem 'launchy', :group => :test
+gem 'capybara', :group => :test
+gem 'faker', :group => :test
+gem 'guard-rspec', :group => :test
+gem 'launchy', :group => :test
 gem 'devise'
 gem 'quiet_assets'
 gem 'figaro'
 gem 'better_errors'
 gem 'binding_of_caller'
-# gem 'rspec-rails', :group => [:development, :test]
-# gem "factory_girl_rails", :group => [:development, :test]
+gem 'rspec-rails', :group => [:development, :test]
+gem "factory_girl_rails", :group => [:development, :test]
 gem "database_cleaner", :group => :test
 gem "email_spec", :group => :test
 
