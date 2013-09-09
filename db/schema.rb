@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130907115521) do
+ActiveRecord::Schema.define(version: 20130827084113) do
 
   create_table "counteroffers", force: true do |t|
     t.integer  "offer_id"
@@ -24,17 +24,6 @@ ActiveRecord::Schema.define(version: 20130907115521) do
   end
 
   add_index "counteroffers", ["offer_id"], name: "index_counteroffers_on_offer_id"
-
-  create_table "offerlists", force: true do |t|
-    t.string   "buyer"
-    t.decimal  "price"
-    t.datetime "date"
-    t.integer  "product_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "offerlists", ["product_id"], name: "index_offerlists_on_product_id"
 
   create_table "offers", force: true do |t|
     t.integer  "product_id"

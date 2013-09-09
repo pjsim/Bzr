@@ -1,44 +1,51 @@
 h1 Your Items
--if !@my_products.empty?
-	-@my_products.each do |product|
-		h3=product.name
-		strong=product.price
-		br
 
-
-		-@offers = @received_offers.where(product: product).order(:created_at => :desc)
-
-		/user
-		/sort if by user
-
-		/most recent offer
-		-if !@offers.empty?
-			h5 most recent offer
-			-offer = @offers.first
-			strong=offer.buyer
-			'&nbsp;
-			strong=offer.buyer_price
-			br
-			button=link_to 'Accept', received_offer_accept_path(offer)
-			-if !offer.counteroffer
-				button=link_to 'CounterOffer', new_counteroffer_path(offer_id: offer.id)
-			button=link_to 'Decline', received_offer_decline_path(offer)
-
-			/offerhistory
-			br
-			button=link_to 'Offer History', root_path
-			h5 offer history
-			-@offers.each do |offer|
-				-if offer.counteroffer
-					=offer.counteroffer.created_at
-					'&nbsp;
-					=offer.counteroffer.seller_price
+ul.small-block-grid-2.large-block-grid-3
+	-if !@my_products.empty?
+		-@my_products.each do |product|
+			li
+				.label
+					h3=product.name
+					strong=product.price
 					br
-				=offer.created_at
-				'&nbsp;
-				strong=offer.buyer
-				'&nbsp;
-				=offer.buyer_price
-				br
 
-		hr
+
+				-@offers = @received_offers.where(product: product).order(:created_at => :desc)
+
+				/user
+				/sort if by user
+
+				/most recent offer
+				-if !@offers.empty?
+					.panel
+						h5 most recent offer
+						-offer = @offers.first
+						strong=offer.buyer
+						'&nbsp;
+						strong=offer.buyer_price
+						br
+					button-bar
+						ul.button-group.round
+							li=link_to 'Accept', received_offer_accept_path(offer), class: 'button success'
+							-if !offer.counteroffer
+								li=link_to 'CounterOffer', new_counteroffer_path(offer_id: offer.id), class: 'button'
+							li=link_to 'Decline', received_offer_decline_path(offer), class: 'button alert'
+
+					/offerhistory
+					br
+					button=link_to 'Offer History', root_path
+					h5 offer history
+					-@offers.each do |offer|
+						-if offer.counteroffer
+							=offer.counteroffer.created_at
+							'&nbsp;
+							=offer.counteroffer.seller_price
+							br
+						=offer.created_at
+						'&nbsp;
+						strong=offer.buyer
+						'&nbsp;
+						=offer.buyer_price
+						br
+
+				hr

@@ -1,10 +1,15 @@
+/ need to loop product instead where product has offer where user is seller
+
+
+
 h1 You have made the following offers
 -if !@given_offers.empty?
 	-@given_offers.each do |offer|
-		h4=offer.product.name
-		br Your Price: #{offer.buyer_price}
-		br Seller: #{offer.seller}
-		br Seller Price: #{offer.seller_price}
+		.label=offer.product.name
+		.panel
+			br Your Price: #{offer.buyer_price}
+			br Seller: #{offer.seller}
+			br Seller Price: #{offer.seller_price}
 		button=link_to 'Change Offer', root_path
 		button=link_to 'Offer History', root_path
 		button=link_to 'Retract Offer', root_path
@@ -15,7 +20,10 @@ h1 You have made the following offers
 			-@counteroffer.each do |counteroffer|
 				strong #{counteroffer.seller} has offered you #{counteroffer.seller_price}, instead of #{counteroffer.offer.seller_price}.
 				br
-				button=link_to 'Accept CounterOffer', root_path
-				button=link_to 'Make Another Offer', new_offer_path(product_id: counteroffer.offer.product.id)
-				button=link_to 'Decline Offer', root_path
-		hr
+
+
+				.button-bar
+					ul.button-group.round
+						li=link_to 'Accept', root_path, class: 'button success'
+						li=link_to 'New Offer', new_offer_path(product_id: counteroffer.offer.product.id), class: 'button'
+						li=link_to 'Decline', root_path, class: 'button alert'
