@@ -1,0 +1,21 @@
+h1 Products
+ul.small-block-grid-2.large-block-grid-4
+	- @products.each do |product|
+		li
+			strong=product.name
+			br
+			= product.price
+			br
+			= product.user.email
+			br
+			- if product.sold?
+				strong SOLD
+				br
+			- elsif user_signed_in? && product.user.email != current_user.email
+				-@offers = Offer.where(product: product)
+				-@offer_already = @offers.where(buyer: current_user.email)
+				-if @offer_already.empty?
+					=link_to 'Offer', new_offer_path(product_id: product.id), class: 'button small round'
+				-else
+					=link_to 'Go to Your Offer', given_offers_index_path, class: 'button small success round'
+			br

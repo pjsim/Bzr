@@ -1,56 +1,18 @@
-
-/Product
-	/Highest Offer --> Buyer, Offer_Price
-
-
-h1 Your Items
-
-ul.small-block-grid-2.large-block-grid-3
-	-if !@my_products.empty?
-		-@my_products.each do |product|
-			li
-				.label
-					h3=product.name
-					strong=product.price
-					br
-
-
-				-@offers = @received_offers.where(product: product).order(:created_at => :desc)
-
-				/user
-				/sort if by user
-
-				/most recent offer
-				-if !@offers.empty?
-					.panel
-						h5 most recent offer
-						-offer = @offers.first
-						strong=offer.buyer
-						'&nbsp;
-						strong=offer.buyer_price
-						br
-					button-bar
-						ul.button-group.round
-							li=link_to 'Accept', received_offer_accept_path(offer), class: 'button success'
-							-if !offer.counteroffer
-								li=link_to 'CounterOffer', new_counteroffer_path(offer_id: offer.id), class: 'button'
-							li=link_to 'Decline', received_offer_decline_path(offer), class: 'button alert'
-
-					/offerhistory
-					br
-					button=link_to 'Offer History', root_path
-					h5 offer history
-					-@offers.each do |offer|
-						-if offer.counteroffer
-							=offer.counteroffer.created_at
-							'&nbsp;
-							=offer.counteroffer.seller_price
-							br
-						=offer.created_at
-						'&nbsp;
-						strong=offer.buyer
-						'&nbsp;
-						=offer.buyer_price
-						br
-
+.row
+	h1 YOUR PRODUCTS
+	.small-6.large-2.columns
+	.small-6.large-8.columns
+		-if !@my_products.empty?
+			-@buy_max = []
+			-@my_products.each do |product|
+				.row
 				hr
+					.small-2.large-4.columns
+						=link_to "#{product.name}", product
+					.small-2.large-4.columns Your Price: #{product.price}
+					.small-2.large-4.columns
+						-if product.offers.any?
+						    -product.offers.each do |offer|
+						    	-@buy_max.append(offer.buyer_price)
+							| Best Offer: #{@buy_max.max}
+	.small-12.large-2.columns

@@ -1,6 +1,9 @@
 class OffersController < ApplicationController
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
 
+
+
+
   # GET /offers
   # GET /offers.json
   def index
@@ -16,8 +19,8 @@ class OffersController < ApplicationController
   def new
     @offer = Offer.new
 
-    #I use this to pass the product id from the new method to the create of form
-    flash[:product_id] = params[:product_id]
+    @product = Product.find(params[:product_id])
+
   end
 
   # GET /offers/1/edit
@@ -29,9 +32,9 @@ class OffersController < ApplicationController
   def create
     @offer = Offer.new(offer_params)
 
-    #connect id from new to create
-    @product_id = flash[:product_id]
-    @product = Product.find(@product_id)
+
+    @product = Product.find(params[:offer][:product_id])
+
 
     @offer.product = @product
     @offer.buyer = current_user.email
@@ -40,8 +43,8 @@ class OffersController < ApplicationController
 
     respond_to do |format|
       if @offer.save
-        format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @offer }
+        format.html { redirect_to given_offers_path, notice: 'Offer was successfully created.' }
+        #format.json { render action: 'show', status: :created, location: @offer }
       else
         format.html { render action: 'new' }
         format.json { render json: @offer.errors, status: :unprocessable_entity }

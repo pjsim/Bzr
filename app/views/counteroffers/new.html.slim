@@ -1,0 +1,53 @@
+p#notice=notice
+.row
+  .large-6.columns
+    .row
+    = @product.name
+    hr
+    | IMAGE
+    hr
+    = @product.sold
+    .row
+    | your price
+    br
+    | his price
+    br
+    | new price
+    = form_for(@counteroffer) do |f|
+      - if @counteroffer.errors.any?
+        #error_explanation
+          h2
+            = pluralize(@counteroffer.errors.count, "error")
+            | prohibited this counteroffer from being saved:
+          ul
+            - @counteroffer.errors.full_messages.each do |msg|
+              li= msg
+      .field
+        = f.label :seller_price
+        br
+          = f.text_field :seller_price
+      .field
+        - f.label :offer
+        br
+          = f.hidden_field :offer_id, value: params[:offer_id]
+      .actions
+        = f.submit
+    hr
+    .row
+    | ABOUT
+    hr
+    = @product.user
+  .large-6.columns
+    .row
+    | OFFER HISTORY
+hr
+.row
+  =link_to 'Back', buy_index_path
+
+
+
+
+
+
+
+

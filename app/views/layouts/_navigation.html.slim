@@ -11,13 +11,12 @@ nav.top-bar
       li=link_to 'Sell', new_product_path
       -if user_signed_in?
         li.divider
-        li=link_to 'Rec Offers', received_offers_index_path
+        li=link_to 'My Products', received_offers_index_path
         li.divider
-        li=link_to 'Giv Offers', given_offers_index_path
+        li=link_to 'My Offers', given_offers_index_path
         li.divider
-      li=link_to 'Products', products_path
-      li=link_to 'Offers', offers_path
-      li=link_to 'CounterOffers', counteroffers_path
+        li=link_to 'My Messages', root_path
+        li.divider
     ul.right
       -if user_signed_in?
         li.divider

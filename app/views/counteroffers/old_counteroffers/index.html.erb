@@ -1,0 +1,35 @@
+<h1>Listing counteroffers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Offer</th>
+      <th>Buyer</th>
+      <th>Seller</th>
+      <th>Buyer price</th>
+      <th>Seller price</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @counteroffers.each do |counteroffer| %>
+      <tr>
+        <td><%= counteroffer.offer %></td>
+        <td><%= counteroffer.buyer %></td>
+        <td><%= counteroffer.seller %></td>
+        <td><%= counteroffer.buyer_price %></td>
+        <td><%= counteroffer.seller_price %></td>
+        <td><%= link_to 'Show', counteroffer %></td>
+        <td><%= link_to 'Edit', edit_counteroffer_path(counteroffer) %></td>
+        <td><%= link_to 'Destroy', counteroffer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Counteroffer', new_counteroffer_path %>

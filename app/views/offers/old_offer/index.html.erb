@@ -1,0 +1,35 @@
+<h1>Listing offers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Buyer</th>
+      <th>Seller</th>
+      <th>Buyer price</th>
+      <th>Seller price</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @offers.each do |offer| %>
+      <tr>
+        <td><%= offer.product.name %></td>
+        <td><%= offer.buyer %></td>
+        <td><%= offer.seller %></td>
+        <td><%= offer.buyer_price %></td>
+        <td><%= offer.seller_price %></td>
+        <td><%= link_to 'Show', offer %></td>
+        <td><%= link_to 'Edit', edit_offer_path(offer) %></td>
+        <td><%= link_to 'Destroy', offer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Offer', new_offer_path %>

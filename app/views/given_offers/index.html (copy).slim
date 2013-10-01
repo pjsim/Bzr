@@ -1,0 +1,67 @@
+
+
+/ need to loop product instead where product has offer where user is seller
+
+
+h1 You have made the following offers
+
+
+
+/getting the look of it right
+
+hr
+hr
+br
+br
+br
+
+.label 
+	h1 Mike's Crowbar
+.panel
+	br Your Current Offer: $200
+	br Seller: Bob
+	br Seller Current Price: $400
+button=link_to 'Change Offer', root_path
+button=link_to 'Retract Offer', root_path
+br
+button=link_to 'Offer History', root_path
+br
+br
+br
+
+hr
+hr
+
+
+
+
+
+
+
+
+
+
+-if !@given_offers.empty?
+	-@given_offers.each do |offer|
+		.label=offer.product.name
+		.panel
+			br Your Price: #{offer.buyer_price}
+			br Seller: #{offer.seller}
+			br Seller Price: #{offer.seller_price}
+		button=link_to 'Change Offer', root_path
+		button=link_to 'Offer History', root_path
+		button=link_to 'Retract Offer', root_path
+		/CounterOffers?
+		-@counteroffer = @received_counteroffers.where(offer: offer)
+		-if !@counteroffer.empty?
+			br
+			-@counteroffer.each do |counteroffer|
+				strong #{counteroffer.seller} has offered you #{counteroffer.seller_price}, instead of #{counteroffer.offer.seller_price}.
+				br
+
+
+				.button-bar
+					ul.button-group.round
+						li=link_to 'Accept', root_path, class: 'button success'
+						li=link_to 'New Offer', new_offer_path(product_id: counteroffer.offer.product.id), class: 'button'
+						li=link_to 'Decline', root_path, class: 'button alert'

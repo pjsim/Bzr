@@ -1,6 +1,5 @@
 class BuyController < ApplicationController
   def index
-  	@products = Product.all
-  	@users = User.all
+  	@products = Product.where.not(user: current_user)
   end
 end

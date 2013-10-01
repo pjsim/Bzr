@@ -1,0 +1,55 @@
+p#notice=notice
+h3 If not owner of product go to show page else go to edit page
+.row
+  .large-6.columns
+    .row
+    = @counteroffer.offer.product.name
+    hr
+    | IMAGE
+    hr
+    = @counteroffer.offer.product.sold
+    .row
+    = @counteroffer.offer.product.price
+    hr
+    .row
+    | ABOUT
+    hr
+    = @counteroffer.offer.product.user
+  .large-6.columns
+    .row
+    | OFFER HISTORY
+    hr
+    -@counteroffer.offer.product.offers.each do |offer|
+      =offer.buyer
+      br
+      =offer.buyer_price
+
+
+hr
+.row
+  =link_to 'Edit', edit_product_path(@product)
+  |&nbsp;
+  =link_to 'Back', buy_index_path
+
+
+
+
+
+p
+  strong Offer:
+  = @counteroffer.offer
+p
+  strong Buyer:
+  = @counteroffer.buyer
+p
+  strong Seller:
+  = @counteroffer.seller
+p
+  strong Buyer price:
+  = @counteroffer.buyer_price
+p
+  strong Seller price:
+  = @counteroffer.seller_price
+= link_to 'Edit', edit_counteroffer_path(@counteroffer)
+| \
+| \#{link_to 'Back', counteroffers_path}

@@ -15,7 +15,10 @@ class CounteroffersController < ApplicationController
   # GET /counteroffers/new
   def new
     @counteroffer = Counteroffer.new
-    flash[:offer_id] = params[:offer_id]
+    #flash[:offer_id] = params[:offer_id]
+    @offer = Offer.find(params[:offer_id])
+    @product = @offer.product
+    #@product = Product.find(params[:product_id])
   end
 
   # GET /counteroffers/1/edit
@@ -27,8 +30,10 @@ class CounteroffersController < ApplicationController
   def create
     @counteroffer = Counteroffer.new(counteroffer_params)
 
-    @offer_id = flash[:offer_id]
-    @offer = Offer.find(@offer_id)
+
+    @offer = Offer.find(params[:counteroffer][:offer_id])
+    #@offer_id = flash[:offer_id]
+    #@offer = Offer.find(@offer_id)
 
     @counteroffer.offer = @offer
     @counteroffer.buyer = @offer.buyer
