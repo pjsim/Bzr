@@ -1,23 +1,18 @@
+h3 template: my products, my offers, my messages
+
 .row
-	.small-6.large-1.columns
-	.small-6.large-10.columns.given_offer
+	h1 YOUR OFFERS
+	.small-6.large-2.columns
+	.small-6.large-8.columns
 		-@given_offers.each do |offer|
-			=offer.product.name
-			|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			=offer.seller_price
-			|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			=offer.buyer_price
-			|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			=offer.seller
-			|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			| History
-			|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			-if offer.counteroffer
-				=link_to "Counteroffer received #{offer.counteroffer.seller_price}", offer.counteroffer
+			.row
 			hr
-	.small-12.large-1.columns
-
-
-
+				.small-2.large-3.columns
+					=link_to "#{offer.product.name}", offer.product
+				.small-2.large-3.columns
+					=offer.seller
+				.small-2.large-3.columns Asking Price: #{offer.seller_price}
+				.small-2.large-3.columns Your Offer: #{offer.buyer_price}
+	.small-12.large-2.columns
 
 

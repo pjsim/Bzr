@@ -1,5 +1,9 @@
 class BuyController < ApplicationController
   def index
-  	@products = Product.where.not(user: current_user)
+  	if user_signed_in?
+  		@products = Product.where.not(user: current_user)
+  	else
+  		@products = Product.all
+  	end
   end
 end
