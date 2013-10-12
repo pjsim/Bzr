@@ -1,0 +1,10 @@
+=inside_layout "application" do
+
+	.row
+		h1 = content_for?(:title) ? yield(:title) : "Bazaar"
+		.small-2.columns
+		.small-8.columns.panel
+			=yield
+		.small-2.columns
+
+end

@@ -1,0 +1,57 @@
+h3 template: product --> new, show, edit
+
+p#notice=notice
+
+.row
+	.large-6.columns
+		.row
+		= @product.name
+		hr
+		=image_tag 'PRODUCTS.png'
+		hr
+		= @product.sold
+		.row
+		= @product.price
+		hr
+		.row
+		| ABOUT
+		hr
+		= @product.user
+	.large-6.columns
+		.row
+		| OFFER HISTORY
+		h3 offers can be done as sortable tables eg sort by last offer, price etc (there was a gem from railscast for this?)
+		hr
+		-@product.offers.each do |offer|
+			=offer.buyer
+			br
+			=offer.buyer_price
+			button-bar
+				ul.button-group.round
+					li=link_to 'Accept', received_offer_accept_path(offer), class: 'button success small'
+					-if !offer.counteroffer
+						li=link_to 'CounterOffer', new_counteroffer_path(offer_id: offer.id), class: 'button small'
+					li=link_to 'Decline', received_offer_decline_path(offer), class: 'button alert small'
+			hr
+
+hr
+.row
+
+	=link_to 'Back', :back
+
+
+	-if user_signed_in?
+		hr
+
+		-@offers = Offer.where(product: @product)
+		-@offer_already = @offers.where(buyer: current_user.email)
+
+
+		button-bar
+			ul.button-group.round
+
+				-if @offer_already.empty?
+					=link_to 'Offer', new_offer_path(product_id: @product.id), class: 'button small'
+				-else
+					=link_to 'Go to Your Offer', given_offers_index_path, class: 'button small success'
+				li=link_to 'Message Seller', root_path, class: 'button small'

@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-
+  layout 'template2'
   # GET /products
   # GET /products.json
   def index
@@ -10,6 +10,10 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+
+    if current_user == @product.user
+      redirect_to edit_product_path(@product)
+    end
   end
 
   # GET /products/new

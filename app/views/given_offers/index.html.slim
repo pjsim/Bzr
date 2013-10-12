@@ -1,18 +1,12 @@
-h3 template: my products, my offers, my messages
-
-.row
-	h1 YOUR OFFERS
-	.small-6.large-2.columns
-	.small-6.large-8.columns
-		-@given_offers.each do |offer|
-			.row
-			hr
-				.small-2.large-3.columns
-					=link_to "#{offer.product.name}", offer.product
-				.small-2.large-3.columns
-					=offer.seller
-				.small-2.large-3.columns Asking Price: #{offer.seller_price}
-				.small-2.large-3.columns Your Offer: #{offer.buyer_price}
-	.small-12.large-2.columns
+-provide(:title, 'My Offers')
+-@given_offers.each do |offer|
+	.row
+		.small-2.large-3.columns
+			=link_to "#{offer.product.name}", offer.product
+		.small-2.large-3.columns
+			=offer.seller
+		.small-2.large-3.columns Asking Price: #{offer.seller_price}
+		.small-2.large-3.columns Your Offer: #{offer.buyer_price}
+	hr
 
 

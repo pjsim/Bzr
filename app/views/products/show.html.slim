@@ -1,60 +1,49 @@
-h3 template: product --> new, show, edit
-
-p#notice=notice
-h3 If not owner of product go to show page else go to edit page
-h3 or better yet.. if at product show and you own product.. show edit options
-h3 if you own product.. show edit. if you don't show make offer, message user etc
-h3 format should be.. left column --> name, pic, details. right column --> price.. options history, things to do with price etc
-.row
-	.large-6.columns
-		.row
-		= @product.name
-		hr
-		=image_tag 'PRODUCTS.png'
-		hr
-		= @product.sold
-		.row
-		= @product.price
-		hr
-		.row
-		| ABOUT
-		hr
-		= @product.user
-	.large-6.columns
-		.row
-		| OFFER HISTORY
-		hr
-		-@product.offers.each do |offer|
-			=offer.buyer
-			br
-			=offer.buyer_price
-			button-bar
-				ul.button-group.round
-					li=link_to 'Accept', received_offer_accept_path(offer), class: 'button success small'
-					-if !offer.counteroffer
-						li=link_to 'CounterOffer', new_counteroffer_path(offer_id: offer.id), class: 'button small'
-					li=link_to 'Decline', received_offer_decline_path(offer), class: 'button alert small'
-			hr
-
-hr
-.row
-	=link_to 'Edit', edit_product_path(@product)
-	|&nbsp;
-	=link_to 'Back', buy_index_path
 
 
-	-if user_signed_in?
-		hr
+/put this into controller
+-if user_signed_in?
+	-@offers = Offer.where(product: @product)
+	-@offer_already = @offers.where(buyer: current_user.email)
 
-		-@offers = Offer.where(product: @product)
-		-@offer_already = @offers.where(buyer: current_user.email)
 
 
-		button-bar
-			ul.button-group.round
 
-				-if @offer_already.empty?
-					=link_to 'Offer', new_offer_path(product_id: @product.id), class: 'button small'
-				-else
-					=link_to 'Go to Your Offer', given_offers_index_path, class: 'button small success'
-				li=link_to 'Message Seller', root_path, class: 'button small'
+-content_for :product_name do
+	=@product.name
+end
+
+
+-content_for :product_image do
+	=image_tag 'PRODUCTS.png'
+end
+
+-content_for :product_sold do
+	= @product.sold
+end
+
+-content_for :product_price do
+	=@product.price
+end
+
+/ -content_for :product_about do
+	
+/ end
+
+-content_for :product_seller do
+	=@product.user.email
+end
+
+-content_for :offer_button do
+	button-bar
+		ul.button-group.round
+			-if @offer_already.empty?
+				=link_to 'Offer', new_offer_path(product_id: @product.id), class: 'button small'
+			-else
+				=link_to 'Go to Your Offer', given_offers_index_path, class: 'button small success'
+			li=link_to 'Message Seller', root_path, class: 'button small'
+end
+
+
+	
+
+

@@ -1,43 +1,44 @@
-h3 template: product --> new, show, edit
+// Only user sees edit page. name cant be edited but everything else can
 
-p#notice=notice
-h3 Only user sees edit page. name cant be edited but everything else can
-.row
-	.large-6.columns
-		.row
-		= @product.name
-		hr
-		| IMAGE
-		hr
-		= @product.sold
-		.row
-		= @product.price
-		= form_for(@product) do |f|
-		  - if @product.errors.any?
-		    #error_explanation
-		      h2
-		        = pluralize(@product.errors.count, "error")
-		        | prohibited this product from being saved:
-		      ul
-		        - @product.errors.full_messages.each do |msg|
-		          li= msg
-		  .field
-		    = f.label :price
-		    br
-		      = f.text_field :price
-		  .actions
-		    = f.submit
-		hr
-		.row
-		| ABOUT
-		hr
-		= @product.user
-	.large-6.columns
-		.row
-		| OFFER HISTORY
-hr
-.row
-	=link_to 'Back', buy_index_path
+-content_for :product_name do
+	=@product.name
+end
+
+
+-content_for :product_image do
+	=image_tag 'PRODUCTS.png'
+end
+
+-content_for :product_sold do
+	= @product.sold
+end
+
+-content_for :product_price do
+	=@product.price
+	= form_for(@product) do |f|
+	  - if @product.errors.any?
+	    #error_explanation
+	      h2
+	        = pluralize(@product.errors.count, "error")
+	        | prohibited this product from being saved:
+	      ul
+	        - @product.errors.full_messages.each do |msg|
+	          li= msg
+	  .field
+	    = f.label :price
+	    br
+	      = f.text_field :price
+	  .actions
+	    = f.submit
+end
+
+/ -content_for :product_about do
+	
+/ end
+
+-content_for :product_seller do
+	=@product.user.email
+end
 
 
 

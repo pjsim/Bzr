@@ -1,4 +1,5 @@
 class ReceivedOffersController < ApplicationController
+  layout 'template'
   def index
   	@my_products = Product.where(user: current_user)
 
