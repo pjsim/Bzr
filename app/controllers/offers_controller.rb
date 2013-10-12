@@ -1,7 +1,7 @@
 class OffersController < ApplicationController
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
 
-
+  layout 'template2'
 
 
   # GET /offers

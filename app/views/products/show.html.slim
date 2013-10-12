@@ -33,7 +33,7 @@ end
 	=@product.user.email
 end
 
--content_for :offer_button do
+-content_for :offer_buttonOLD do
 	button-bar
 		ul.button-group.round
 			-if @offer_already.empty?
@@ -43,6 +43,12 @@ end
 			li=link_to 'Message Seller', root_path, class: 'button small'
 end
 
+-content_for :offer_button do
+	-if @offer_already.empty?
+		=link_to 'Offer', new_offer_path(product_id: @product.id), class: 'button small radius'
+	-else
+		=link_to 'Go to Your Offer', given_offers_index_path, class: 'button small success radius'
+	=link_to 'Message Seller', root_path, class: 'button small round'
 
 	
 

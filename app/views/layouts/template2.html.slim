@@ -1,45 +1,32 @@
+/this is a new product template idea
+/I want to simplfy it and have buttons on the side which go to: offer history, graphs, etc
 =inside_layout "application" do
-	
 	p#notice=notice
-	/=yield
 	.row
+		.large-2.columns
 		.large-6.columns
 			=yield :new_product_column
-			.row
-				=yield :product_name
-				=yield :offer_button
+			.panel.radius=yield :product_name
+			.panel.radius=yield :product_price
+			.panel.radius=yield :product_image
+			.panel.radius=yield :product_sold
+			.panel.radius=yield :product_about
+			.panel.radius=yield :product_seller
+		.large-2.columns
+			=yield :offer_button
+		.large-2.columns
+			| OFFER HISTORY
+			hr
+			h3 offers can be done as sortable tables eg sort by last offer, price etc (there was a gem from railscast for this?)
+			hr
+			-@product.offers.each do |offer|
+				=offer.buyer
+				br
+				=offer.buyer_price
+				button-bar
+					ul.button-group.round
+						li=link_to 'Accept', received_offer_accept_path(offer), class: 'button success small'
+						-if !offer.counteroffer
+							li=link_to 'CounterOffer', new_counteroffer_path(offer_id: offer.id), class: 'button small'
+						li=link_to 'Decline', received_offer_decline_path(offer), class: 'button alert small'
 				hr
-				=yield :product_image
-				hr
-				
-				=yield :product_sold
-			.row
-				
-				=yield :product_price
-				hr
-				.row
-				| ABOUT
-				=yield :product_about
-				hr
-				=yield :product_seller
-		.large-6.columns
-			.row
-				| OFFER HISTORY
-				hr
-				h3 offers can be done as sortable tables eg sort by last offer, price etc (there was a gem from railscast for this?)
-				hr
-				-@product.offers.each do |offer|
-					=offer.buyer
-					br
-					=offer.buyer_price
-					button-bar
-						ul.button-group.round
-							li=link_to 'Accept', received_offer_accept_path(offer), class: 'button success small'
-							-if !offer.counteroffer
-								li=link_to 'CounterOffer', new_counteroffer_path(offer_id: offer.id), class: 'button small'
-							li=link_to 'Decline', received_offer_decline_path(offer), class: 'button alert small'
-					hr
-
-
-	=link_to 'Back', :back
-end
