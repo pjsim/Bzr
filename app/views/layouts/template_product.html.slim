@@ -1,0 +1,35 @@
+/this is a new product template idea
+/I want to simplfy it and have buttons on the side which go to: offer history, graphs, etc
+=inside_layout "application" do
+	p#notice=notice
+	.row
+		.large-1.columns
+
+		.large-6.columns
+
+			/ for new products
+			=yield :new_product_column
+
+			.panel.radius
+				.row
+					.small-6.columns.name_label=yield :product_name
+					.small-6.columns.price_label=yield :product_price
+
+			.panel.radius
+				=yield :product_image
+
+			.panel.radius
+				=yield :product_sold
+				=yield :product_location
+				=yield :product_tags
+				=yield :product_about
+
+		.large-4.columns.panel
+			/if in edit (user owns product)
+			.row=yield :offer_history
+			/if in show (user doesn't own product)
+			.row=yield :product_seller
+			.row=yield :offer_button
+			.row=yield :message_button
+
+		.large-1.columns

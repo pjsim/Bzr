@@ -1,4 +1,5 @@
 Bazaar::Application.routes.draw do
+  get "notes/index"
   get "messages/index"
   get "given_offers/index"
   get "received_offers/index"

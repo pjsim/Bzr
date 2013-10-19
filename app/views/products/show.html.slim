@@ -8,21 +8,18 @@
 
 
 
+
 -content_for :product_name do
-	=@product.name
+	strong=@product.name
 end
-
-
 -content_for :product_image do
 	=image_tag 'PRODUCTS.png'
 end
-
 -content_for :product_sold do
 	= @product.sold
 end
-
 -content_for :product_price do
-	=@product.price
+	="$#{@product.price}"
 end
 
 / -content_for :product_about do
@@ -48,8 +45,9 @@ end
 		=link_to 'Offer', new_offer_path(product_id: @product.id), class: 'button small radius'
 	-else
 		=link_to 'Go to Your Offer', given_offers_index_path, class: 'button small success radius'
-	=link_to 'Message Seller', root_path, class: 'button small round'
+end
 
-	
-
+-content_for :message_button do
+	=link_to 'Message Seller', root_path, class: 'button small radius'
+end
 

@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  layout 'template2'
+  layout 'template_product'
   # GET /products
   # GET /products.json
   def index

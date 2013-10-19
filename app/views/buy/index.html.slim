@@ -1,20 +1,25 @@
-h3 template: buy
+-content_for :tags do
+	| TAGS
+end
 
-.row
-	.large-6.columns.tag-line TAGS 
-	.large-6.columns.tag-line PRICE RANGE
+-content_for :price_range do
+	| PRICE RANGE
+end
 
-ul.small-block-grid-1.large-block-grid-6
-	- @products.each do |product|
-		li.product-box.row
-			.small-6.columns
-				strong=link_to product.name, product
-				=image_tag 'PRODUCTS.png'
-			.small-6.columns
-				|$#{product.price}
-				hr
-				|Insert description here..........
 
-				- if product.sold?
-					strong SOLD
-					br
+-content_for :product_grid do
+	ul.small-block-grid-1.large-block-grid-6
+		-@products.each do |product|
+			li.panel.radius.product-box
+				.row
+					strong.small-6.columns=link_to product.name, product
+					.small-6.columns="$#{product.price}"
+				.row
+					=image_tag 'PRODUCTS.png'
+				.row
+					|Insert description here....
+				.row
+					-if product.sold?
+						strong SOLD
+						br
+end

@@ -1,10 +1,31 @@
-// Only user sees edit page. name cant be edited but everything else can
 
-h1 change of plan. user sees show of his own product but there is an edit button he only sees next to product name
+h1 UP HERE USER GETS OPTION TO GO INTO EDIT OR VIEW MODE
+
+-content_for :offer_history do
+	| OFFER HISTORY
+	hr
+	h3 offers can be done as sortable tables eg sort by last offer, price etc (there was a gem from railscast for this?)
+	hr
+	-@product.offers.each do |offer|
+		=offer.buyer
+		br
+		=offer.buyer_price
+		button-bar
+			ul.button-group.round
+				li=link_to 'Accept', received_offer_accept_path(offer), class: 'button success small'
+				-if !offer.counteroffer
+					li=link_to 'CounterOffer', new_counteroffer_path(offer_id: offer.id), class: 'button small'
+				li=link_to 'Decline', received_offer_decline_path(offer), class: 'button alert small'
+end
+
+
+
 
 -content_for :product_name do
 	=@product.name
 end
+
+
 
 
 -content_for :product_image do
@@ -37,10 +58,6 @@ end
 / -content_for :product_about do
 	
 / end
-
--content_for :product_seller do
-	=@product.user.email
-end
 
 
 

@@ -9,6 +9,11 @@ nav.top-bar
       li=link_to 'Buy', buy_index_path
       li.divider
       li=link_to 'Sell', new_product_path
+
+
+      li=link_to 'Notes', notes_index_path
+      li.divider
+      
       -if user_signed_in?
         li.divider
         li=link_to 'My Products', received_offers_index_path

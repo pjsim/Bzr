@@ -1,0 +1,12 @@
+=inside_layout "application" do
+	.row
+		.large-1.columns
+		.large-12.columns
+			.row
+				.large-6.columns=yield :tags
+				.large-6.columns=yield :price_range
+			.row
+				=yield :product_grid
+
+		.large-1.columns
+end

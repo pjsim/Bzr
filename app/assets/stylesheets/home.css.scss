@@ -2,10 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.large-centered{
-	vertical-align: center;
+.small-8 {
 	text-align: center;
-	border: 2.5px black solid;
-	border-radius: 15px;
-	width:50%
+}
+
+
+.recto {
+	border-radius: 2px;
+	border: solid 2px black;
 }
