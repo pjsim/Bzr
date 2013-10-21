@@ -1,5 +1,7 @@
+/ -content_for :edit_show_button do
+/ 	button Show
+/ end
 
-h1 UP HERE USER GETS OPTION TO GO INTO EDIT OR VIEW MODE
 
 -content_for :offer_history do
 	| OFFER HISTORY
@@ -22,22 +24,6 @@ end
 
 
 -content_for :product_name do
-	=@product.name
-end
-
-
-
-
--content_for :product_image do
-	=image_tag 'PRODUCTS.png'
-end
-
--content_for :product_sold do
-	= @product.sold
-end
-
--content_for :product_price do
-	=@product.price
 	= form_for(@product) do |f|
 	  - if @product.errors.any?
 	    #error_explanation
@@ -48,12 +34,43 @@ end
 	        - @product.errors.full_messages.each do |msg|
 	          li= msg
 	  .field
-	    = f.label :price
-	    br
-	      = f.text_field :price
+	    /= f.label :price
+	    /br
+	    = f.text_field :name, value: @product.name
 	  .actions
-	    = f.submit
+	    = f.submit 'Change'
 end
+
+
+
+
+-content_for :product_image do
+	=image_tag 'PRODUCTS.png'
+end
+
+-content_for :product_price do
+	= form_for(@product) do |f|
+	  - if @product.errors.any?
+	    #error_explanation
+	      h2
+	        = pluralize(@product.errors.count, "error")
+	        | prohibited this product from being saved:
+	      ul
+	        - @product.errors.full_messages.each do |msg|
+	          li= msg
+	  .field
+	    /= f.label :price
+	    /br
+	    = f.text_field :price, value: @product.price
+	  .actions
+	    = f.submit 'Change'
+end
+
+
+-content_for :product_sold do
+	= @product.sold
+end
+
 
 / -content_for :product_about do
 	

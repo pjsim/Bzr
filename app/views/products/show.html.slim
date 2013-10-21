@@ -1,13 +1,6 @@
-
-
-/put this into controller
--if user_signed_in?
-	-@offers = Offer.where(product: @product)
-	-@offer_already = @offers.where(buyer: current_user.email)
-
-
-
-
+/ -content_for :edit_show_button do
+/ 	button Edit
+/ end
 
 -content_for :product_name do
 	strong=@product.name
@@ -30,24 +23,16 @@ end
 	=@product.user.email
 end
 
--content_for :offer_buttonOLD do
-	button-bar
-		ul.button-group.round
-			-if @offer_already.empty?
-				=link_to 'Offer', new_offer_path(product_id: @product.id), class: 'button small'
-			-else
-				=link_to 'Go to Your Offer', given_offers_index_path, class: 'button small success'
-			li=link_to 'Message Seller', root_path, class: 'button small'
-end
-
 -content_for :offer_button do
-	-if @offer_already.empty?
+	-if user_signed_in? && @offer_already.empty?
 		=link_to 'Offer', new_offer_path(product_id: @product.id), class: 'button small radius'
-	-else
+	-elsif user_signed_in?
 		=link_to 'Go to Your Offer', given_offers_index_path, class: 'button small success radius'
+	-else
+		h3 Sign up now to reply to this user
 end
 
 -content_for :message_button do
-	=link_to 'Message Seller', root_path, class: 'button small radius'
+	=link_to 'Message Seller', root_path, class: 'button small radius' unless !user_signed_in?
 end
 

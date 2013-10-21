@@ -1,5 +1,11 @@
 -content_for :new_product_column do
+
+
+
   = form_for(@product) do |f|
+
+
+
     - if @product.errors.any?
       #error_explanation
         h2
@@ -8,17 +14,36 @@
         ul
           - @product.errors.full_messages.each do |msg|
             li= msg
-    .field
+
+
+    .field.panel
       = f.label :name
       br
         = f.text_field :name
-    hr
-    =image_tag 'PRODUCTS.png'
-    .field
+
+    .field.panel
       = f.label :price
       br
         = f.text_field :price
+
+    .field.panel
+      = f.label :image
+      =image_tag 'PRODUCTS.png'
+
+
+
+
+
+
+
+    .field.panel
+      = f.label :about
+
+
+
     .actions
       = f.submit
+
+
   =link_to 'Back', :back
 end

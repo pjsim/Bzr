@@ -2,6 +2,9 @@
 /I want to simplfy it and have buttons on the side which go to: offer history, graphs, etc
 =inside_layout "application" do
 	p#notice=notice
+	/ .row
+	/ 	=yield :edit_show_button 
+
 	.row
 		.large-1.columns
 
@@ -9,6 +12,7 @@
 
 			/ for new products
 			=yield :new_product_column
+
 
 			.panel.radius
 				.row
@@ -25,6 +29,7 @@
 				=yield :product_about
 
 		.large-4.columns.panel
+			.row=yield :make_offer
 			/if in edit (user owns product)
 			.row=yield :offer_history
 			/if in show (user doesn't own product)
@@ -33,3 +38,6 @@
 			.row=yield :message_button
 
 		.large-1.columns
+		
+	.row
+		=link_to 'Back', :back

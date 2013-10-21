@@ -10,6 +10,9 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    
+    @offers = Offer.where(product: @product)
+    @offer_already = @offers.where(buyer: current_user.email) unless !user_signed_in?
 
     if current_user == @product.user
       redirect_to edit_product_path(@product)
@@ -18,6 +21,10 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
+    if !user_signed_in?
+      redirect_to new_user_registration_path
+      flash[:notice] = "Sign up now to sell a product"
+    end
     @product = Product.new
   end
 
